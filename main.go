@@ -2,18 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	// import package under the alias "docker"
 	docker "github.com/fsouza/go-dockerclient"
 )
 
 func main() {
-	// retrieve the $DOCKER_HOST environment variable
-	endpoint := os.Getenv("DOCKER_HOST")
-
 	// initialize a docker-client connection to the unix socket
-	client, _ := docker.NewClient(endpoint)
+	client, _ := docker.NewClientFromEnv()
 
 	// retrieve a list of all docker images
 	//	imgs, _ := client.ListImages(docker.ListImagesOptions{All: false})
@@ -23,8 +19,10 @@ func main() {
 
 	// dump some info for all of these beautiful containers
 	for _, container := range containers {
-		fmt.Println("ID:", container.ID)
-		fmt.Println("Name:", container.Names)
-		fmt.Println("Label:", container.Labels)
+		fmt.Println(container.ID, container.Names[0])
+
+		//		fmt.Println("ID:", container.ID)
+		//		fmt.Println("Name:", container.Names)
+		//		fmt.Println("Label:", container.Labels)
 	}
 }
