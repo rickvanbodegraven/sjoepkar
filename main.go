@@ -21,7 +21,8 @@ func main() {
 	// dump some info for all of these beautiful containers
 	for _, container := range containers {
 		if strings.Contains(container.Names[0], "cssonline-proxy") {
-			fmt.Println(container.Names[1:])
+			fmt.Println(container.Names[0][1:])
+			return
 		}
 	}
 }
